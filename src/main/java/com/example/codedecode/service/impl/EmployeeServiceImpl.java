@@ -9,6 +9,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static java.lang.StringTemplate.STR;
 
@@ -52,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeServiceInterface {
 
     @Override
     public Employee findEmployeeById(Long id) {
-        return employeeRepo.findById(id).orElseThrow();
+        return employeeRepo.findById(id).orElseThrow(() -> new BusinessException("601", "No such employee is found"));
     }
 
     @Override
