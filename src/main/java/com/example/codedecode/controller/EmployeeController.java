@@ -2,6 +2,7 @@ package com.example.codedecode.controller;
 
 import com.example.codedecode.entity.Employee;
 import com.example.codedecode.service.inter.EmployeeServiceInterface;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class EmployeeController {
     private EmployeeServiceInterface employeeService;
 
     @PostMapping("/save")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> addEmployee(@Valid @RequestBody Employee employee) {
         Employee savedEmployee = employeeService.addEmployee(employee);
         log.info("Employee is created");
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
